@@ -28,8 +28,8 @@ class TestAsync_composition(unittest.TestCase):
             return '{}'.format(name)
 
         @async_function
-        def concat(*s1):
-            return ' '.join(s1)
+        def concat(s1, s2, s3):
+            return ' '.join((s1, s2, s3))
 
         @async_function
         def print1(s):
@@ -39,9 +39,15 @@ class TestAsync_composition(unittest.TestCase):
         def print2(s):
             return s + ' [from print2]'
 
-        c = (my_fun & my_fun2('luca') & my_fun2('genoveffa')) >>\
-            concat >>\
-            (print1 | print2)
+        # c = (my_fun & my_fun2('luca') & my_fun2('genoveffa')) >>\
+        #     concat >>\
+        #     (print1 | print2)
+
+        par = my_fun & my_fun2('luca') & my_fun2('genoveffa')  # And
+
+        print_ = print1 | print2  # Or
+
+        c = par >> concat >> print_  # Seq
 
         res = c.execute()
 
