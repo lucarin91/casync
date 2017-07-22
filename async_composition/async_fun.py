@@ -3,15 +3,6 @@
 import random
 
 
-def call_unpack(f, s):
-    if isinstance(s, str):
-        return f(s)
-    elif s is not None:
-        return f(*s)
-    else:
-        return f()
-
-
 class Node:
     ID = 0
 
@@ -64,24 +55,36 @@ class Node:
 
 
 class And(Node):
-    def execute(self, *args):
-        # aync calls
-        return [call_unpack(c.execute, args) for c in self.children]
+    pass
+    # def execute(self, *args):
+    #     # aync calls
+    #     return [call_unpack(c.execute, args) for c in self.children]
 
 
 class Or(Node):
-    def execute(self, *args):
-        # aync calls
-        res = [call_unpack(c.execute, args) for c in self.children]
-        return res[random.randint(0, len(res) - 1)]
+    pass
+    # def execute(self, *args):
+    #     # aync calls
+    #     res = [call_unpack(c.execute, args) for c in self.children]
+    #     return res[random.randint(0, len(res) - 1)]
 
 
 class Seq(Node):
-    def execute(self, *args):
-        res = None
-        for c in self.children:
-            res = call_unpack(c.execute, res)
-        return res
+    pass
+    # def execute(self, *args):
+    #     res = None
+    #     for c in self.children:
+    #         res = call_unpack(c.execute, res)
+    #     return res
+
+
+def _call_unpack(f, s):
+    if isinstance(s, str):
+        return f(s)
+    elif s is not None:
+        return f(*s)
+    else:
+        return f()
 
 
 class Async_Fun(Node):
@@ -90,13 +93,14 @@ class Async_Fun(Node):
         self._f = f
         self._args = []
 
-    def execute(self, *args):
+    def execute(self, args=[]):
         if len(args) > 0:
             self._args = args
         # print(*self._args, **self._kwds)
-        return self._f(*self._args)
+        return _call_unpack(self._f, self._args)
 
     def __call__(self, *args):
+        # print('call', self.__name__)
         af = Async_Fun(self._f)
         af._args = args
         # self._f(*self._args, **self._kwds)

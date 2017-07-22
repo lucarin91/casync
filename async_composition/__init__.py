@@ -7,3 +7,7 @@ __email__ = 'lucarin91@gmail.com'
 __version__ = '0.1.0'
 
 from .async_fun import Async_Fun, async_function, And, Or, Seq
+
+from .executor import Executor
+
+from .async_fun import async_function as af
