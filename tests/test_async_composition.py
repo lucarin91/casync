@@ -1,6 +1,6 @@
 import unittest
 
-from async_composition import async_function, Executor, Async_Fun, af
+from casync import async_function, Executor, Async_Fun, af
 
 
 # TODO: fix the decorator
@@ -29,8 +29,8 @@ def print2(s):
     return s + ' [from print2]'
 
 
-class TestAsync_composition(unittest.TestCase):
-    """Tests for `async_composition` package."""
+class Testcasync(unittest.TestCase):
+    """Tests for `casync` package."""
 
     def setUp(self):
         """Set Up test fixtures, if any."""
@@ -46,7 +46,7 @@ class TestAsync_composition(unittest.TestCase):
         par = af(my_fun) & af(my_fun2)('luca') & af(my_fun2)('genoveffa')  # And
         print_ = af(print1) | af(print2)  # Or
         c = par >> af(concat) >> print_  # Seq
-        from async_composition.utils import print_graph
+        from casync.utils import print_graph
         print_graph(c)
 
         ex = Executor()

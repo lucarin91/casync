@@ -25,5 +25,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: lucarin91/async_composition
+    repo: lucarin91/casync
     python: 2.7

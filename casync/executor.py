@@ -15,14 +15,17 @@ class Executor:
     def close(self):
         self._pool.close()
 
-    def run(self, g):
+    def __call__(self, g):
+        return self._run(g)
+
+    def _run(self, g):
         assert isinstance(g, Node)
 
         res = self._rec_run(g)
         return _get_or_wait(res)
 
     def _rec_run(self, node, inputs=[]):
-        print(node.id)
+        # print(node.id)
         if isinstance(node, Or):
             # res = None
             # def call(r):
@@ -36,7 +39,7 @@ class Executor:
             # TODO: quit after first task return
             for r in results:
                 value = _get_or_wait(r)
-                print('Or:', value)
+                # print('Or:', value)
                 return value
         elif isinstance(node, And):
             results = []
@@ -47,7 +50,7 @@ class Executor:
             res = []
             for r in results:
                 value = _get_or_wait(r)
-                print('And:', value)
+                # print('And:', value)
                 res.append(value)
             return res
         elif isinstance(node, Seq):
@@ -56,5 +59,5 @@ class Executor:
                 res = self._rec_run(c, _get_or_wait(res))
             return res
         elif isinstance(node, Async_Fun):
-            print('inputs:', inputs)
+            # print('inputs:', inputs)
             return self._pool.apply_async(node.execute, [inputs])

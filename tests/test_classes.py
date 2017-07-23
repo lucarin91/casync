@@ -1,7 +1,7 @@
 import unittest
 
-from async_composition import async_function, And, Seq, Or, Executor, af
-from async_composition.utils import print_graph
+from casync import async_function, And, Seq, Or, Executor, af
+from casync.utils import print_graph
 
 
 # @async_function
@@ -29,8 +29,8 @@ def print2(s):
     return s + ' [from print2]'
 
 
-class TestAsync_composition(unittest.TestCase):
-    """Tests for `async_composition` package."""
+class Testcasync(unittest.TestCase):
+    """Tests for `casync` package."""
 
     def setUp(self):
         """Set Up test fixtures, if any."""
