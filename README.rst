@@ -68,7 +68,7 @@ An example of usage::
 
   comp1 = af(fun1) & af(fun2)
   comp2 = af(fun1) | af(fun2)
-  comp3 = comp1 >> concat
+  comp3 = comp1 >> af(concat)
 
 
   ex = Executor()
