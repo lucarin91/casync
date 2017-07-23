@@ -79,7 +79,7 @@ An example of usage::
 
 Features
 --------
-* Create a computational graph with ``and(&)``, ``or(|)` and ``seq(>>)`` constructors.
+* Create a computational graph with ``and(&)``, ``or(|)`` and ``seq(>>)`` constructors.
 * Execute graph in parallel using a python `multithreading` library.
 
 Todo
