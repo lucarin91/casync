@@ -35,7 +35,7 @@ inside the folder do this command to install the library::
 
   python setup.py install
 
-After this, it is possible to tests the library using the examples in the ``examples``folder.
+After this, it is possible to tests the library using the examples in the ``examples`` folder.
 
 How use
 --------
