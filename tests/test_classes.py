@@ -50,6 +50,6 @@ class Testcasync(unittest.TestCase):
 
         ex = Executor()
 
-        res = ex.run(c)
+        res = ex(c)
 
         self.assertIn('hello luca!', res)

@@ -1,9 +1,7 @@
-"""Main module."""
-
-import random
+# import random
 
 
-class Node:
+class Node(object):
     ID = 0
 
     def __init__(self, *children):
@@ -89,7 +87,7 @@ def _call_unpack(f, s):
 
 class Async_Fun(Node):
     def __init__(self, f):
-        super().__init__()
+        super(self.__class__, self).__init__()
         self._f = f
         self._args = []
 

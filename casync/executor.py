@@ -1,3 +1,5 @@
+import random
+
 from multiprocessing import Pool
 from multiprocessing.pool import AsyncResult
 
@@ -36,11 +38,13 @@ class Executor:
                 results.append(
                     self._rec_run(c, inputs)  # , callback=call)
                 )
-            # TODO: quit after first task return
-            for r in results:
-                value = _get_or_wait(r)
+            random.shuffle(results)  # only for DEBUG
+            while True:
+                for r in results:
+                    if r.ready():
+                        # TODO: stop all other tasks
+                        return _get_or_wait(r)
                 # print('Or:', value)
-                return value
         elif isinstance(node, And):
             results = []
             for c in node.children:
